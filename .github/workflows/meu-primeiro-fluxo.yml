@@ -1,0 +1,47 @@
+#aqui irei definir o nome do pipeline
+name: meu primeiro workflow
+#quais eventos (gatilhos)disparam o fluxo ?
+#temos eventos do tipo push,pull request, merge...
+on:
+  push:
+     branches: [main,master,develop]
+  pull_request:
+     branches:
+        -main
+        -master
+        -develop
+# quais sao os trabalhos a serem executados pelo workflow 
+jobs:
+   tarefa1:
+     name: primeira tarefa
+     needs: tarefa3
+     runs-on: ubuntu-latest
+     steps:
+       - name: passo 1
+         run: echo "executa o passo 1"
+       - name: passo 2
+         run: echo "executa o passo 2"
+       - name: passo 3
+         run: echo "passo falho" | exit 1
+       
+   tarefa2:
+      name: segunda tarefa
+      needs: tarefa1
+      runs-on: ubuntu-latest
+      steps:
+       - name: passo 4
+         run: echo "executa o passo 4"
+       - name: passo 5
+         run: echo "executa o passo 5"
+       - name: passo 6
+         run: echo "executa p passo 6" 
+   tarefa3:
+       name: terceira tarefa
+       runs-on: ubuntu-latest
+       steps:
+       - name: passo 7
+         run: echo "executa o passo 7"
+       - name: passo 8
+         run: echo "executa o passo 8"
+       - name: passo 9
+         run: echo "executa o passo 9"
